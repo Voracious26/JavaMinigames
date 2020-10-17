@@ -1,14 +1,35 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tictactoe;
+import java.awt.event.ActionEvent;
+import javax.swing.*;
 
-/**
- *
- * @author harri
- */
 public class Tile {
+    private char state = ' ';
+    private JButton tileButton;
+    private Board parent;
     
+    public Tile(Board parentBoard){
+        parent = parentBoard;
+        tileButton = new JButton();
+        tileButton.addActionListener((ActionEvent e) -> {
+            JButton b = (JButton)e.getSource();
+            getTicTacToe().returnToMainMenu();
+        });
+    }
+    
+    public char getState(){
+        return state;
+    }
+    public void setState(char newState){
+        state = newState;
+    }
+    
+    public JButton getButton(){
+        return tileButton;
+    }
+    
+    private TicTacToe getTicTacToe(){
+        return parent.parent;
+    }
 }
+
+
