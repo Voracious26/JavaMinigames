@@ -7,43 +7,52 @@ import java.awt.*;
 import javax.swing.*;
 
 public class JavaMinigames {
-
-    private static Scanner scan;
-    
+    private static Scanner scan;    
     // GUI elements
-    private static JFrame mainMenu;    
+    private static JFrame mainFrame;    
     private static JButton[] menuButtons;
-    private static JPanel buttonPanel;
-    private static JLabel welcomeMessage;
-    
+    private static JPanel mainPanel;
+    private static JLabel welcomeMessage;    
     // GUI text
     private static String welcomeMsg = "Welcome to Java Minigames! Click to choose a game.";
-    private static String[] buttonNames = {"TicTacToe", "Checkers", "Chess"};
-    
+    private static String[] buttonNames = {"TicTacToe", "Checkers", "Chess"};    
     // Game objects
     private static TicTacToe tictactoe;
     
     public static void main(String[] args) {
         scan = new Scanner(System.in);
-        initializeMenu();
-        mainMenu.show();
+        mainFrame = new JFrame();  
+        loadMainFrame();
     }
     
-    public static void initializeMenu(){
-        mainMenu = new JFrame();
-        buttonPanel = new JPanel();
-        
+    public static void loadMainFrame(){
+        mainPanel = generateMainMenuPanel();
+        mainFrame.add(mainPanel);
+        mainFrame.setSize(400, 100);
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setVisible(true);
+    }    
+    
+    public static JPanel generateMainMenuPanel(){
+        JPanel mainMenuPanel = new JPanel();
+        // welcome text
         welcomeMessage = new JLabel(welcomeMsg);
-        buttonPanel.add(welcomeMessage);
-        
+        mainMenuPanel.add(welcomeMessage);               
+        // buttons
         menuButtons = new JButton[buttonNames.length];
         for (int i = 0; i < menuButtons.length; ++i){
             menuButtons[i] = new JButton(buttonNames[i]);
-            buttonPanel.add(menuButtons[i]);
-        }
-        
-        mainMenu.add(buttonPanel);
-        mainMenu.setSize(400, 100);
-        mainMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            mainMenuPanel.add(menuButtons[i]);
+        }        
+        // click events
+        menuButtons[0].addActionListener(  
+            new ActionListener() { 
+                public void actionPerformed(ActionEvent event) {
+                    mainFrame.remove(mainPanel);
+                    tictactoe = new TicTacToe(mainFrame);
+                }  
+            }  
+        );        
+        return mainMenuPanel;    
     }
 }
