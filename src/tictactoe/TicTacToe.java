@@ -14,10 +14,10 @@ public class TicTacToe {
     public JButton playAgainButton;
     public JButton mainMenuButton;
     // infoArea text
-    private String startMsg = "It's Tic Tac Toe time. Click on a square to make your turn when you're ready.";
-    private String winMsg = "You won the game! Congratulations.";
-    private String lossMsg = "You lost. May you never forget it.";
-    private String tieMsg = "It's a tie. How unexpected.";
+    private static final String startMsg = "It's Tic Tac Toe time. Click on a square to make your turn when you're ready.";
+    private static final String winMsg = "You won the game! Congratulations.";
+    private static final String lossMsg = "You lost. May you never forget it.";
+    private static final String tieMsg = "It's a tie. How unexpected.";
     // game variables
     public boolean gameOver = false;
     public int boardSize = 3; 
@@ -48,7 +48,7 @@ public class TicTacToe {
         
         // initialize mainFrame
         mainFrame = menuFrame;
-        mainFrame.setSize(600,600);        
+        mainFrame.setSize(Tile.imgSize*boardSize,Tile.imgSize*boardSize);        
         mainFrame.add(gameBoardPanel, BorderLayout.CENTER);
         mainFrame.add(infoPanel, BorderLayout.SOUTH);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

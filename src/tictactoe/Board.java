@@ -21,6 +21,7 @@ public class Board {
         for(int i = 0; i < boardSize; ++i){
             for(int j = 0; j < boardSize; ++j){
                 tiles[i][j].setState(' ');
+                tiles[i][j].clearIcon();
             }
         }
     }
@@ -31,5 +32,17 @@ public class Board {
             }
         }
         return toAdd;
+    }
+    
+    public boolean isFull(){
+        boolean full = true;
+        for(int i = 0; i < boardSize; ++i){
+            for(int j = 0; j < boardSize; ++j){
+                if(tiles[i][j].getState() == ' '){
+                    full = false;
+                }
+            }
+        }
+        return full;
     }
 }
