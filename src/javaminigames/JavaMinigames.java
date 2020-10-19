@@ -29,6 +29,7 @@ public class JavaMinigames {
         mainPanel = generateMainMenuPanel();
         mainFrame.add(mainPanel);
         mainFrame.setSize(400, 100);
+        mainFrame.setResizable(false);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
     }    
