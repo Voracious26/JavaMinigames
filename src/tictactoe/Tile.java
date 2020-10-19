@@ -12,7 +12,7 @@ public class Tile {
         tileButton = new JButton();
         tileButton.addActionListener((ActionEvent e) -> {
             JButton b = (JButton)e.getSource();
-            getTicTacToe().returnToMainMenu();
+            getTicTacToe().gameOver();
         });
     }
     

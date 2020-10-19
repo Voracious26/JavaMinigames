@@ -17,7 +17,13 @@ public class Board {
             }
         }
     }
-    
+    public void clearBoard(){
+        for(int i = 0; i < boardSize; ++i){
+            for(int j = 0; j < boardSize; ++j){
+                tiles[i][j].setState(' ');
+            }
+        }
+    }
     public JPanel addButtonsToPanel(JPanel toAdd){
         for(int i = 0; i < boardSize; ++i){
             for(int j = 0; j < boardSize; ++j){
