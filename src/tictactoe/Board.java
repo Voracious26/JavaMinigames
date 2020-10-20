@@ -58,4 +58,45 @@ public class Board {
         tiles[xRand][yRand].setState('o');
     }
     
+    public char checkWin(){
+        char winner = ' ';
+        char prev;
+        int soFar;
+        
+        // horizontal
+        for (int i = 0; i < boardSize; i++){
+            soFar = 0;
+            prev = ' ';      
+            for (int j = 0; j < boardSize; j++){
+                soFar++;
+                if (j != 0 && prev != tiles[i][j].getState())
+                    soFar = 0;
+                if (tiles[i][j].getState() == ' ')
+                    soFar = 0;
+                if (soFar >= boardSize)
+                    winner = tiles[i][j].getState();                
+                prev = tiles[i][j].getState();
+            }
+        }
+        
+        // vertical
+        for (int j = 0; j < boardSize; j++){
+            soFar = 0;
+            prev = ' ';      
+            for (int i = 0; i < boardSize; i++){
+                soFar++;
+                if (i != 0 && prev != tiles[i][j].getState())
+                    soFar = 0;
+                if (tiles[i][j].getState() == ' ')
+                    soFar = 0;
+                if (soFar >= boardSize)
+                    winner = tiles[i][j].getState();                
+                prev = tiles[i][j].getState();
+            }
+        }    
+        
+        // TODO: add checks for diagonal 
+        return winner;
+    }
+    
 }

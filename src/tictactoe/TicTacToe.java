@@ -54,12 +54,10 @@ public class TicTacToe {
         
     }
     public void hideGameOver(){
-        infoArea.setVisible(true);
         playAgainButton.setVisible(false);
         mainMenuButton.setVisible(false);    
     }
     public void showGameOver(){
-        infoArea.setVisible(false);
         playAgainButton.setVisible(true);
         mainMenuButton.setVisible(true);
     }
@@ -78,11 +76,27 @@ public class TicTacToe {
     public void playAgain(){
         hideGameOver();
         setInfoMsg(startMsg);
+        gameOver = false;
         gameBoard.clearBoard();
     }
     public void returnToMainMenu(){
         mainFrame.remove(gameBoardPanel);
         mainFrame.remove(infoPanel);
         JavaMinigames.loadMainFrame();
+    }
+    public void endWithWinner(char winner){
+        switch(winner){
+            case 'x':
+                setInfoMsg(winMsg);
+                break;
+            case 'o':
+                setInfoMsg(lossMsg);
+                break;
+            case ' ':
+                setInfoMsg(tieMsg);
+                break;        
+        }
+        gameOver = true;
+        gameOver();
     }
 }

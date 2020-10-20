@@ -23,15 +23,26 @@ public class Tile {
         parent = parentBoard;
         tileButton = new JButton();
         tileButton.addActionListener((ActionEvent e) -> {
-            if(state == ' '){
+            char gameWinner;
+            if(state == ' ' && !getTicTacToe().gameOver){
                 tileButton.setIcon(xImg);
-                setState('x');
-                
-                if(parent.isFull()){
-                    getTicTacToe().gameOver();        
+                setState('x');                
+                gameWinner = parent.checkWin();
+                if(gameWinner != ' '){
+                    getTicTacToe().endWithWinner(gameWinner);
+                }
+                else if(parent.isFull()){
+                    getTicTacToe().endWithWinner(gameWinner);        
                 }
                 else{
-                    parent.computerMove();
+                    parent.computerMove();                    
+                    gameWinner = parent.checkWin();
+                    if(gameWinner != ' '){
+                        getTicTacToe().endWithWinner(gameWinner);
+                    }
+                    else if(parent.isFull()){
+                        getTicTacToe().endWithWinner(gameWinner);        
+                    }
                 }
             }
         });
