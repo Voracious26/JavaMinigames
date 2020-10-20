@@ -23,14 +23,16 @@ public class Tile {
         parent = parentBoard;
         tileButton = new JButton();
         tileButton.addActionListener((ActionEvent e) -> {
-            JButton b = (JButton)e.getSource();            
-            b.setIcon(xImg);
-            setState('x');
-            if(parent.isFull()){
-                getTicTacToe().gameOver();        
-            }
-            else{
-                parent.computerMove();
+            if(state == ' '){
+                tileButton.setIcon(xImg);
+                setState('x');
+                
+                if(parent.isFull()){
+                    getTicTacToe().gameOver();        
+                }
+                else{
+                    parent.computerMove();
+                }
             }
         });
     }
