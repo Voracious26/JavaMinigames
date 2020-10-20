@@ -10,7 +10,7 @@ public class TicTacToe {
     public JFrame mainFrame;   
     public JPanel gameBoardPanel;
     public JPanel infoPanel;
-    public JTextArea infoArea;
+    public JLabel infoArea;
     public JButton playAgainButton;
     public JButton mainMenuButton;
     // infoArea text
@@ -26,9 +26,7 @@ public class TicTacToe {
     public TicTacToe(JFrame menuFrame){          
         // initialize infoPanel
         infoPanel = new JPanel();
-        infoArea = new JTextArea (1, 30);
-        infoArea.setText(startMsg);
-        infoArea.setEditable(false);
+        infoArea = new JLabel(startMsg);
         playAgainButton = new JButton("Play again");
         mainMenuButton = new JButton("Main menu");
         mainMenuButton.addActionListener((ActionEvent e) -> {
