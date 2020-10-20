@@ -1,5 +1,6 @@
 package tictactoe;
 
+import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.*;
 
 public class Board {
@@ -45,4 +46,16 @@ public class Board {
         }
         return full;
     }
+    
+    public void computerMove(){        
+        int xRand = ThreadLocalRandom.current().nextInt(0, boardSize);
+        int yRand = ThreadLocalRandom.current().nextInt(0, boardSize);
+        while(tiles[xRand][yRand].getState() != ' '){
+            xRand = ThreadLocalRandom.current().nextInt(0, boardSize);
+            yRand = ThreadLocalRandom.current().nextInt(0, boardSize);
+        }
+        tiles[xRand][yRand].setIcon('o');
+        tiles[xRand][yRand].setState('o');
+    }
+    
 }

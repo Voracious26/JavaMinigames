@@ -25,9 +25,12 @@ public class Tile {
         tileButton.addActionListener((ActionEvent e) -> {
             JButton b = (JButton)e.getSource();            
             b.setIcon(xImg);
-            setState('X');
+            setState('x');
             if(parent.isFull()){
                 getTicTacToe().gameOver();        
+            }
+            else{
+                parent.computerMove();
             }
         });
     }
@@ -49,6 +52,17 @@ public class Tile {
     
     public void clearIcon(){
         tileButton.setIcon(null);
+    }
+    
+    public void setIcon(char icon){
+        switch(icon){
+            case 'x':
+                tileButton.setIcon(xImg);
+                break;
+            case 'o':
+                tileButton.setIcon(oImg);
+                break;
+        }
     }
     
     public static ImageIcon scaleIcon(String url, int width, int height){
