@@ -20,7 +20,6 @@ public class TicTacToe {
     private static final String tieMsg = "It's a tie. How unexpected.";
     // game variables
     public boolean gameOver = false;
-    public int boardSize = 3; 
     public Board gameBoard;
     
     public TicTacToe(JFrame menuFrame){          
@@ -46,7 +45,7 @@ public class TicTacToe {
         
         // initialize mainFrame
         mainFrame = menuFrame;
-        mainFrame.setSize(Tile.imgSize*boardSize,Tile.imgSize*boardSize);        
+        mainFrame.setSize(Tile.imgSize*gameBoard.boardSize,Tile.imgSize*gameBoard.boardSize);        
         mainFrame.add(gameBoardPanel, BorderLayout.CENTER);
         mainFrame.add(infoPanel, BorderLayout.SOUTH);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,7 +65,7 @@ public class TicTacToe {
     }    
     public JPanel generateBoardPanel(){
         JPanel boardPanel = new JPanel();
-        boardPanel.setLayout(new GridLayout(boardSize,boardSize)); 
+        boardPanel.setLayout(new GridLayout(gameBoard.boardSize,gameBoard.boardSize)); 
         gameBoard.addButtonsToPanel(boardPanel);
         return boardPanel;
     }

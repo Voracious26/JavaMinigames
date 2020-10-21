@@ -4,7 +4,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.*;
 
 public class Board {
-    int boardSize = 3; 
+    public int boardSize = 3;
     TicTacToe parent;
     Tile tiles[][];
     
@@ -18,6 +18,18 @@ public class Board {
             }
         }
     }
+    public Board(TicTacToe parentBoard, int size){
+        boardSize = size;
+        parent = parentBoard;
+        // initialize 2D tile array
+        tiles = new Tile[boardSize][boardSize];
+        for(int i = 0; i < boardSize; ++i){
+            for(int j = 0; j < boardSize; ++j){
+                tiles[i][j] = new Tile(this);
+            }
+        }
+    }
+    
     public void clearBoard(){
         for(int i = 0; i < boardSize; ++i){
             for(int j = 0; j < boardSize; ++j){
