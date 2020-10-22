@@ -107,7 +107,34 @@ public class Board {
             }
         }    
         
-        // TODO: add checks for diagonal 
+        // down right diagonal
+        if(tiles[0][0].getState() != ' '){                 
+            boolean match = true;
+            prev = tiles[0][0].getState();
+            for (int k = 1; k < boardSize; ++k){
+                if(tiles[k][k].getState() != prev){
+                    match = false;
+                }
+            }
+            if(match){
+                winner = prev;
+            }
+        }
+        
+        // down left diagonal
+        if(tiles[boardSize-1][0].getState() != ' '){                 
+            boolean match = true;
+            prev = tiles[boardSize-1][0].getState();
+            for (int k = boardSize - 1; k >= 0; --k){
+                System.out.print(tiles[k][boardSize - 1 - k].getState());
+                if(tiles[k][boardSize - 1 - k].getState() != prev){
+                    match = false;
+                }
+            }
+            if(match){
+                winner = prev;
+            }
+        }
         return winner;
     }
     
