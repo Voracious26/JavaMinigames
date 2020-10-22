@@ -15,13 +15,15 @@ public class JavaMinigames {
     private static JLabel welcomeMessage;    
     // GUI text
     private static String welcomeMsg = "Welcome to Java Minigames! Click to choose a game.";
-    private static String[] buttonNames = {"TicTacToe", "Checkers", "Chess"};    
+    private static String[] buttonNames = {"TicTacToe", "Checkers", "Chess", "Settings"};    
     // Game objects
     private static TicTacToe tictactoe;
+    private static Settings settings;
     
     public static void main(String[] args) {
         scan = new Scanner(System.in);
         mainFrame = new JFrame();  
+        settings = new Settings();
         loadMainFrame();
     }
     
@@ -46,14 +48,15 @@ public class JavaMinigames {
             mainMenuPanel.add(menuButtons[i]);
         }        
         // click events
-        menuButtons[0].addActionListener(  
-            new ActionListener() { 
-                public void actionPerformed(ActionEvent event) {
-                    mainFrame.remove(mainPanel);
-                    tictactoe = new TicTacToe(mainFrame);
-                }  
-            }  
-        );        
+        menuButtons[0].addActionListener((ActionEvent event) -> {
+            mainPanel.setVisible(false);
+            tictactoe = new TicTacToe(mainFrame);
+        });
+        menuButtons[3].addActionListener((ActionEvent event) -> {
+            mainPanel.setVisible(false);
+            settings.load(mainFrame);
+            
+        });
         return mainMenuPanel;    
     }
 }

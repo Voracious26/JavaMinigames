@@ -126,7 +126,6 @@ public class Board {
             boolean match = true;
             prev = tiles[boardSize-1][0].getState();
             for (int k = boardSize - 1; k >= 0; --k){
-                System.out.print(tiles[k][boardSize - 1 - k].getState());
                 if(tiles[k][boardSize - 1 - k].getState() != prev){
                     match = false;
                 }
