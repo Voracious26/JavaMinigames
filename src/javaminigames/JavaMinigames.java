@@ -1,6 +1,7 @@
 package javaminigames;
 import java.util.Scanner;
 import tictactoe.TicTacToe;
+import checkers.Checkers;
 
 import java.awt.event.*; 
 import java.awt.*; 
@@ -18,6 +19,7 @@ public class JavaMinigames {
     private static String[] buttonNames = {"TicTacToe", "Checkers", "Chess", "Settings"};    
     // Game objects
     private static TicTacToe tictactoe;
+    private static Checkers checkers;
     private static Settings settings;
     
     public static void main(String[] args) {
@@ -51,6 +53,10 @@ public class JavaMinigames {
         menuButtons[0].addActionListener((ActionEvent event) -> {
             mainPanel.setVisible(false);
             tictactoe = new TicTacToe(mainFrame);
+        });
+        menuButtons[1].addActionListener((ActionEvent event) -> {
+            mainPanel.setVisible(false);
+            checkers = new Checkers(mainFrame);
         });
         menuButtons[3].addActionListener((ActionEvent event) -> {
             mainPanel.setVisible(false);
