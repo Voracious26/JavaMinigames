@@ -164,6 +164,100 @@ public class Board {
                 }
             }
             
+            // "If we can block the player from making a winning move, do it"
+            // CHECK FOR TWO IN A ROW
+            for(int i = 0; i < boardSize; ++i){
+                oCount = 0;
+                for(int j = 0; j < boardSize; ++j){
+                    if(tiles[i][j].getState() == 'x'){
+                        oCount++;                        
+                    }
+                }
+                // if we have two in this row
+                if(oCount == boardSize - 1){
+                    // find the blank tile (if it exists) and store it in tmp
+                    Tile tmp = null;
+                    for(int k = 0; k < boardSize; ++k){
+                        if(tiles[i][k].getState() == ' '){
+                                tmp = tiles[i][k];
+                        }
+                    }
+                    if(tmp != null){
+                        tmp.setIcon('o');
+                        tmp.setState('o');
+                        return;
+                    }
+                }
+            }
+            // CHECK FOR TWO IN A COLUMN
+            for(int j = 0; j < boardSize; ++j){
+                oCount = 0;
+                for(int i = 0; i < boardSize; ++i){
+                    if(tiles[i][j].getState() == 'x'){
+                        oCount++;                        
+                    }
+                }
+                // if we have two in this row
+                if(oCount == boardSize - 1){
+                    // find the blank tile (if it exists) and store it in tmp
+                    Tile tmp = null;
+                    for(int k = 0; k < boardSize; ++k){
+                        if(tiles[k][j].getState() == ' '){
+                            tmp = tiles[k][j];
+                            break;
+                        }
+                    }
+                    if(tmp != null){
+                        tmp.setIcon('o');
+                        tmp.setState('o');
+                        return;
+                    }
+                }
+            }            
+            // CHECK FOR TWO IN A DOWN RIGHT DIAGONAL         
+            oCount = 0;
+            for(int i = 0; i < boardSize; ++i){
+                if(tiles[i][i].getState() == 'x'){
+                    oCount++;
+                }
+            }
+            if(oCount == boardSize - 1){
+                Tile tmp = null;
+                for(int i = 0; i < boardSize; ++i){
+                    if(tiles[i][i].getState() == ' '){
+                        tmp = tiles[i][i];
+                        break;
+                    }
+                }
+                if (tmp != null){
+                    tmp.setIcon('o');
+                    tmp.setState('o');
+                    return;
+                }
+            }            
+            // CHECK FOR TWO IN A DOWN LEFT DIAGONAL         
+            oCount = 0;
+            for(int i = 0; i < boardSize; ++i){
+                if(tiles[i][boardSize - 1 - i].getState() == 'x'){
+                    oCount++;
+                }
+            }
+            System.out.println("COUNT: "+oCount);
+            if(oCount == boardSize - 1){
+                Tile tmp = null;
+                for(int i = 0; i < boardSize; ++i){
+                    if(tiles[i][boardSize - 1 - i].getState() == ' '){
+                        tmp = tiles[i][boardSize - 1 - i];
+                        break;
+                    }
+                }
+                if (tmp != null){
+                    tmp.setIcon('o');
+                    tmp.setState('o');
+                    return;
+                }
+            }
+            
             
             // else do random
             randomComputerMove();
