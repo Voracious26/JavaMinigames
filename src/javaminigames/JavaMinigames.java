@@ -10,7 +10,7 @@ import javax.swing.*;
 public class JavaMinigames {
     private static Scanner scan;    
     // GUI elements
-    private static JFrame mainFrame;    
+    public static JFrame mainFrame;    
     private static JButton[] menuButtons;
     private static JPanel mainPanel;
     private static JLabel welcomeMessage;    

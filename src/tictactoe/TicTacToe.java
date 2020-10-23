@@ -7,7 +7,6 @@ import javaminigames.JavaMinigames;
 
 public class TicTacToe {    
     // GUI elements
-    public JFrame mainFrame;   
     public JPanel gameBoardPanel;
     public JPanel infoPanel;
     public JLabel infoArea;
@@ -44,12 +43,11 @@ public class TicTacToe {
         gameBoardPanel = generateBoardPanel();
         
         // initialize mainFrame
-        mainFrame = menuFrame;
-        mainFrame.setSize(Tile.imgSize*gameBoard.boardSize,Tile.imgSize*gameBoard.boardSize);        
-        mainFrame.add(gameBoardPanel, BorderLayout.CENTER);
-        mainFrame.add(infoPanel, BorderLayout.SOUTH);
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setVisible(true);
+        JavaMinigames.mainFrame.setSize(Tile.imgSize*gameBoard.boardSize,Tile.imgSize*gameBoard.boardSize);        
+        JavaMinigames.mainFrame.add(gameBoardPanel, BorderLayout.CENTER);
+        JavaMinigames.mainFrame.add(infoPanel, BorderLayout.SOUTH);
+        JavaMinigames.mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JavaMinigames.mainFrame.setVisible(true);
         
     }
     public void hideGameOver(){
@@ -79,8 +77,8 @@ public class TicTacToe {
         gameBoard.clearBoard();
     }
     public void returnToMainMenu(){
-        mainFrame.remove(gameBoardPanel);
-        mainFrame.remove(infoPanel);
+        gameBoardPanel.setVisible(false);
+        infoPanel.setVisible(false);
         JavaMinigames.loadMainFrame();
     }
     public void endWithWinner(char winner){

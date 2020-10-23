@@ -6,20 +6,19 @@
 package checkers;
 
 import java.awt.BorderLayout;
+import javaminigames.JavaMinigames;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 
 public class Checkers {    
-    public JFrame mainFrame;   
     public JPanel gameBoardPanel;
     
     public Checkers(JFrame menuFrame){   
         gameBoardPanel = new JPanel();
         
-        // initialize mainFrame
-        mainFrame = menuFrame;      
-        mainFrame.add(gameBoardPanel, BorderLayout.CENTER);
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setVisible(true);
+        // initialize mainFrame     
+        JavaMinigames.mainFrame.add(gameBoardPanel, BorderLayout.CENTER);
+        JavaMinigames.mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JavaMinigames.mainFrame.setVisible(true);
     }
 }
