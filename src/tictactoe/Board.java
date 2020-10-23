@@ -1,6 +1,7 @@
 package tictactoe;
 
 import java.util.concurrent.ThreadLocalRandom;
+import javaminigames.Settings;
 import javax.swing.*;
 
 public class Board {
@@ -58,8 +59,122 @@ public class Board {
         }
         return full;
     }
+
     
-    public void computerMove(){        
+    public void computerMove(){     
+        if(Settings.TICTACTOE_SMARTAI){
+            /**
+            LOGIC BREAKDOWN (in order of priority):
+            * If we can make a winning move, do it
+            * If we can block the player from making a winning move, do it
+            * If we have one O in a row/column/diagonal, add a second if the lane is open
+            * Otherwise, random move 
+            **/
+            // "If we can make a winning move, do it"
+            // CHECK FOR TWO IN A ROW
+            for(int i = 0; i < boardSize; ++i){
+                int oCount = 0;
+                for(int j = 0; j < boardSize; ++j){
+                    if(tiles[i][j].getState() == 'o'){
+                        oCount++;                        
+                    }
+                }
+                // if we have two in this row
+                if(oCount == boardSize - 1){
+                    // find the blank tile (if it exists) and store it in tmp
+                    Tile tmp = null;
+                    for(int k = 0; k < boardSize; ++k){
+                        if(tiles[i][k].getState() == ' '){
+                                tmp = tiles[i][k];
+                        }
+                    }
+                    if(tmp != null){
+                        tmp.setIcon('o');
+                        tmp.setState('o');
+                        return;
+                    }
+                }
+            }
+            // CHECK FOR TWO IN A COLUMN
+            for(int j = 0; j < boardSize; ++j){
+                int oCount = 0;
+                for(int i = 0; i < boardSize; ++i){
+                    if(tiles[i][j].getState() == 'o'){
+                        oCount++;                        
+                    }
+                }
+                // if we have two in this row
+                if(oCount == boardSize - 1){
+                    // find the blank tile (if it exists) and store it in tmp
+                    Tile tmp = null;
+                    for(int k = 0; k < boardSize; ++k){
+                        if(tiles[k][j].getState() == ' '){
+                            tmp = tiles[k][j];
+                            break;
+                        }
+                    }
+                    if(tmp != null){
+                        tmp.setIcon('o');
+                        tmp.setState('o');
+                        return;
+                    }
+                }
+            }            
+            // CHECK FOR TWO IN A DOWN RIGHT DIAGONAL         
+            int oCount = 0;
+            for(int i = 0; i < boardSize; ++i){
+                if(tiles[i][i].getState() == 'o'){
+                    oCount++;
+                }
+            }
+            if(oCount == boardSize - 1){
+                Tile tmp = null;
+                for(int i = 0; i < boardSize; ++i){
+                    if(tiles[i][i].getState() == ' '){
+                        tmp = tiles[i][i];
+                        break;
+                    }
+                }
+                if (tmp != null){
+                    tmp.setIcon('o');
+                    tmp.setState('o');
+                    return;
+                }
+            }            
+            // CHECK FOR TWO IN A DOWN LEFT DIAGONAL         
+            oCount = 0;
+            for(int i = 0; i < boardSize; ++i){
+                if(tiles[i][boardSize - 1 - i].getState() == 'o'){
+                    oCount++;
+                }
+            }
+            System.out.println("COUNT: "+oCount);
+            if(oCount == boardSize - 1){
+                Tile tmp = null;
+                for(int i = 0; i < boardSize; ++i){
+                    if(tiles[i][boardSize - 1 - i].getState() == ' '){
+                        tmp = tiles[i][boardSize - 1 - i];
+                        break;
+                    }
+                }
+                if (tmp != null){
+                    tmp.setIcon('o');
+                    tmp.setState('o');
+                    return;
+                }
+            }
+            
+            
+            // else do random
+            randomComputerMove();
+            
+            
+        }
+        else{
+            randomComputerMove();
+        }
+    }
+    public void randomComputerMove(){
         int xRand = ThreadLocalRandom.current().nextInt(0, boardSize);
         int yRand = ThreadLocalRandom.current().nextInt(0, boardSize);
         while(tiles[xRand][yRand].getState() != ' '){
