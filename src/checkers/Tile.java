@@ -45,8 +45,25 @@ public class Tile {
         return tileButton;
     }
     
-    
+    public void clearIcon(){
+        tileButton.setIcon(null);
+    }
         
+    public void updateIcon(){
+        if(state == 'r'){
+            tileButton.setIcon(redImg);
+        }
+        else if(state == 'j'){
+            tileButton.setIcon(redKingImg);
+        }
+        else if(state == 'b'){
+            tileButton.setIcon(blackImg);
+        }
+        else if(state == 'k'){
+            tileButton.setIcon(blackKingImg);
+        }
+    }
+    
     public static ImageIcon scaleIcon(String url, int width, int height){
         BufferedImage img = null;
         try {
