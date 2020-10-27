@@ -13,10 +13,12 @@ public class Tile {
     private static String blackKingImgUrl  = "res/blackCheckerKing.png";
     private static String redImgUrl = "res/redChecker.png";
     private static String redKingImgUrl = "res/redChecker.png";
+    private static String blankImgUrl = "res/blank.png";
     private static ImageIcon blackImg;
     private static ImageIcon blackKingImg;
     private static ImageIcon redImg;
     private static ImageIcon redKingImg;
+    private static ImageIcon blankImg;
     public static int imgSize = 100;
     private char state = ' ';
     private JButton tileButton;
@@ -27,6 +29,7 @@ public class Tile {
         redKingImg = scaleIcon(redKingImgUrl, imgSize, imgSize);
         blackImg = scaleIcon(blackImgUrl, imgSize, imgSize);
         blackKingImg = scaleIcon(blackKingImgUrl, imgSize, imgSize);
+        blankImg = scaleIcon(blankImgUrl, imgSize, imgSize);
         parent = parentBoard;
         tileButton = new JButton();
         
@@ -61,6 +64,9 @@ public class Tile {
         }
         else if(state == 'k'){
             tileButton.setIcon(blackKingImg);
+        }
+        else if(state == ' '){
+            tileButton.setIcon(blankImg);
         }
     }
     

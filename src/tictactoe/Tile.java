@@ -10,8 +10,10 @@ import javax.swing.*;
 public class Tile {
     private static String xImgUrl = "res/x.png";
     private static String oImgUrl = "res/o.png";
+    private static String blankImgUrl = "res/blank.png";
     private static ImageIcon xImg;
     private static ImageIcon oImg;
+    private static ImageIcon blankImg;
     public static int imgSize = 150;
     private char state = ' ';
     private JButton tileButton;
@@ -20,6 +22,7 @@ public class Tile {
     public Tile(Board parentBoard){
         xImg = scaleIcon(xImgUrl, imgSize, imgSize);
         oImg = scaleIcon(oImgUrl, imgSize, imgSize);
+        blankImg = scaleIcon(blankImgUrl, imgSize, imgSize);
         parent = parentBoard;
         tileButton = new JButton();
         tileButton.addActionListener((ActionEvent e) -> {
@@ -46,6 +49,7 @@ public class Tile {
                 }
             }
         });
+        setIcon(' ');
     }
     
     public char getState(){
@@ -64,7 +68,7 @@ public class Tile {
     }
     
     public void clearIcon(){
-        tileButton.setIcon(null);
+        setIcon(' ');
     }
     
     public void setIcon(char icon){
@@ -74,6 +78,9 @@ public class Tile {
                 break;
             case 'o':
                 tileButton.setIcon(oImg);
+                break;
+            case ' ':
+                tileButton.setIcon(blankImg);
                 break;
         }
     }
