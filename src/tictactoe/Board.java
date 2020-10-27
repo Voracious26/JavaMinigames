@@ -148,7 +148,6 @@ public class Board {
                     oCount++;
                 }
             }
-            System.out.println("COUNT: "+oCount);
             if(oCount == boardSize - 1){
                 Tile tmp = null;
                 for(int i = 0; i < boardSize; ++i){
