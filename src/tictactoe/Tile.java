@@ -4,31 +4,22 @@ import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import javaminigames.Icons;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class Tile {
-    private static String xImgUrl = "res/x.png";
-    private static String oImgUrl = "res/o.png";
-    private static String blankImgUrl = "res/blank.png";
-    private static ImageIcon xImg;
-    private static ImageIcon oImg;
-    private static ImageIcon blankImg;
-    public static int imgSize = 150;
     private char state = ' ';
     private JButton tileButton;
     private Board parent;
     
     public Tile(Board parentBoard){
-        xImg = scaleIcon(xImgUrl, imgSize, imgSize);
-        oImg = scaleIcon(oImgUrl, imgSize, imgSize);
-        blankImg = scaleIcon(blankImgUrl, imgSize, imgSize);
         parent = parentBoard;
         tileButton = new JButton();
         tileButton.addActionListener((ActionEvent e) -> {
             char gameWinner;
             if(state == ' ' && !getTicTacToe().gameOver){
-                tileButton.setIcon(xImg);
+                tileButton.setIcon(Icons.xImg);
                 setState('x');                
                 gameWinner = parent.checkWin();
                 if(gameWinner != ' '){
@@ -74,26 +65,15 @@ public class Tile {
     public void setIcon(char icon){
         switch(icon){
             case 'x':
-                tileButton.setIcon(xImg);
+                tileButton.setIcon(Icons.xImg);
                 break;
             case 'o':
-                tileButton.setIcon(oImg);
+                tileButton.setIcon(Icons.oImg);
                 break;
             case ' ':
-                tileButton.setIcon(blankImg);
+                tileButton.setIcon(Icons.blankTicTacToeImg);
                 break;
         }
-    }
-    
-    public static ImageIcon scaleIcon(String url, int width, int height){
-        BufferedImage img = null;
-        try {
-            img = ImageIO.read(new File(url));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Image dimg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);   
-        return new ImageIcon(dimg);
     }
 }
 

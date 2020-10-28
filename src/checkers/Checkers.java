@@ -9,6 +9,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import javaminigames.JavaMinigames;
 import java.awt.event.ActionEvent;
+import javaminigames.Icons;
 import javax.swing.*;
 
 public class Checkers {    
@@ -19,7 +20,7 @@ public class Checkers {
         gameBoard = new Board(this);
         gameBoardPanel = new JPanel();
         gameBoardPanel = generateBoardPanel();
-        JavaMinigames.mainFrame.setSize(Tile.imgSize*gameBoard.boardSize,Tile.imgSize*gameBoard.boardSize);      
+        JavaMinigames.mainFrame.setSize(Icons.checkersImgSize*gameBoard.boardSize,Icons.checkersImgSize*gameBoard.boardSize);      
         
         // initialize mainFrame     
         JavaMinigames.mainFrame.add(gameBoardPanel, BorderLayout.CENTER);

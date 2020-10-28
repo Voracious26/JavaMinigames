@@ -2,6 +2,7 @@ package tictactoe;
 
 import java.awt.event.*; 
 import java.awt.*; 
+import javaminigames.Icons;
 import javax.swing.*;
 import javaminigames.JavaMinigames;
 
@@ -43,7 +44,7 @@ public class TicTacToe {
         gameBoardPanel = generateBoardPanel();
         
         // initialize mainFrame
-        JavaMinigames.mainFrame.setSize(Tile.imgSize*gameBoard.boardSize,Tile.imgSize*gameBoard.boardSize);        
+        JavaMinigames.mainFrame.setSize(Icons.tictactoeImgSize*gameBoard.boardSize,Icons.tictactoeImgSize*gameBoard.boardSize);        
         JavaMinigames.mainFrame.add(gameBoardPanel, BorderLayout.CENTER);
         JavaMinigames.mainFrame.add(infoPanel, BorderLayout.SOUTH);
         JavaMinigames.mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

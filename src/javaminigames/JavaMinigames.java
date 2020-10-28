@@ -26,6 +26,7 @@ public class JavaMinigames {
         scan = new Scanner(System.in);
         mainFrame = new JFrame();  
         settings = new Settings();
+        Icons.initializeIcons();
         loadMainFrame();
     }
     
