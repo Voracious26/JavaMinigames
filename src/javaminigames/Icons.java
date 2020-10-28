@@ -23,11 +23,21 @@ public class Icons {
     private static String blackKingImgUrl  = "res/checkers/blackCheckerKing.png";
     private static String redImgUrl = "res/checkers/redChecker.png";
     private static String redKingImgUrl = "res/checkers/redChecker.png"; 
-    private static String blankCheckersImgUrl = "res/blank.png";
     public static ImageIcon blackImg;
     public static ImageIcon blackKingImg;
     public static ImageIcon redImg;
-    public static ImageIcon redKingImg;
+    public static ImageIcon redKingImg;    
+    
+    private static String blackSelectedImgUrl = "res/checkers/blackChecker_selected.png";
+    private static String blackKingSelectedImgUrl  = "res/checkers/blackCheckerKing_selected.png";
+    private static String redSelectedImgUrl = "res/checkers/redChecker_selected.png";
+    private static String redKingImgSelectedUrl = "res/checkers/redChecker_selected.png"; 
+    public static ImageIcon blackSelectedImg;
+    public static ImageIcon blackKingSelectedImg;
+    public static ImageIcon redSelectedImg;
+    public static ImageIcon redKingSelectedImg;
+    
+    private static String blankCheckersImgUrl = "res/blank.png";
     public static ImageIcon blankCheckersImg;
     
     public static void initializeIcons(){        
@@ -41,6 +51,12 @@ public class Icons {
         redKingImg = scaleIcon(redKingImgUrl, checkersImgSize, checkersImgSize);
         blackImg = scaleIcon(blackImgUrl, checkersImgSize, checkersImgSize);
         blackKingImg = scaleIcon(blackKingImgUrl, checkersImgSize, checkersImgSize);
+        
+        redSelectedImg = scaleIcon(redSelectedImgUrl, checkersImgSize, checkersImgSize);
+        redKingSelectedImg = scaleIcon(redKingImgSelectedUrl, checkersImgSize, checkersImgSize);
+        blackSelectedImg = scaleIcon(blackSelectedImgUrl, checkersImgSize, checkersImgSize);
+        blackKingSelectedImg = scaleIcon(blackKingSelectedImgUrl, checkersImgSize, checkersImgSize);
+        
         blankCheckersImg = scaleIcon(blankCheckersImgUrl, checkersImgSize, checkersImgSize);
     }
         

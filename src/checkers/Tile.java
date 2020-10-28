@@ -14,6 +14,22 @@ public class Tile {
         tileButton = new JButton();
         
         tileButton.addActionListener((ActionEvent e) -> {
+            switch(state){
+                case 'r':
+                    tileButton.setIcon(Icons.redSelectedImg);
+                    break;
+                case 'j':
+                    tileButton.setIcon(Icons.redKingSelectedImg);
+                    break;
+                case 'b':
+                    tileButton.setIcon(Icons.blackSelectedImg);
+                    break;
+                case 'k':
+                    tileButton.setIcon(Icons.blackKingSelectedImg);
+                    break;
+                default:
+                    break;
+            }
         });
     }
         
