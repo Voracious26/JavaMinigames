@@ -10,8 +10,8 @@ import javax.swing.ImageIcon;
 public class Icons {
     // tictactoe    
     public static int tictactoeImgSize = 150;
-    private static String xImgUrl = "res/x.png";
-    private static String oImgUrl = "res/o.png";
+    private static String xImgUrl = "res/tictactoe/x.png";
+    private static String oImgUrl = "res/tictactoe/o.png";
     private static String blankTicTacToeImgUrl = "res/blank.png";
     public static ImageIcon xImg;
     public static ImageIcon oImg;
@@ -19,10 +19,10 @@ public class Icons {
     
     // checkers
     public static int checkersImgSize = 100;
-    private static String blackImgUrl = "res/blackChecker.png";
-    private static String blackKingImgUrl  = "res/blackCheckerKing.png";
-    private static String redImgUrl = "res/redChecker.png";
-    private static String redKingImgUrl = "res/redChecker.png"; 
+    private static String blackImgUrl = "res/checkers/blackChecker.png";
+    private static String blackKingImgUrl  = "res/checkers/blackCheckerKing.png";
+    private static String redImgUrl = "res/checkers/redChecker.png";
+    private static String redKingImgUrl = "res/checkers/redChecker.png"; 
     private static String blankCheckersImgUrl = "res/blank.png";
     public static ImageIcon blackImg;
     public static ImageIcon blackKingImg;
