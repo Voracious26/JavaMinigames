@@ -75,4 +75,37 @@ public class Board {
             }
         }
     }
+    
+    public int[] getCoordsForTile(Tile tile){
+        int[] coords = new int[]{-1,-1};
+        
+        for(int i = 0; i < boardSize; ++i){
+            for(int j = 0; j < boardSize; ++j){
+                if(tiles[i][j] == tile){
+                    coords[0] = i;
+                    coords[1] = j;
+                }
+            }
+        }
+        return coords;
+    }
+    
+    public Checker getCheckerForCoords(int[] coords){
+        Checker tmp;
+        if(coords[0] != -1 && coords[1] != -1){
+            for(int i = 0; i < redCheckers.size(); ++i){
+                tmp = redCheckers.get(i);
+                if(tmp.getX() == coords[0] && tmp.getY() == coords[1]){
+                    return tmp;
+                }    
+            }
+            for(int i = 0; i < blackCheckers.size(); ++i){
+                tmp = blackCheckers.get(i);
+                if(tmp.getX() == coords[0] && tmp.getY() == coords[1]){
+                    return tmp;
+                }
+            }
+        }
+        return null;
+    }
 }

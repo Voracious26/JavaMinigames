@@ -14,6 +14,10 @@ public class Tile {
         tileButton = new JButton();
         
         tileButton.addActionListener((ActionEvent e) -> {
+            Checker thisChecker = parent.getCheckerForCoords(parent.getCoordsForTile(this));
+            if(thisChecker != null){
+            
+            }
             switch(state){
                 case 'r':
                     tileButton.setIcon(Icons.redSelectedImg);
