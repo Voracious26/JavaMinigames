@@ -61,7 +61,7 @@ public class Tile {
         tileButton.setIcon(null);
     }
         
-    public void updateIcon(){            
+    public void updateIcon(){
         if(selected){
                 switch(state){
                     case RED:
@@ -75,6 +75,9 @@ public class Tile {
                         break;
                     case BLACKKING:
                         tileButton.setIcon(Icons.blackKingSelectedImg);
+                        break;
+                    case BLANK:
+                        tileButton.setIcon(Icons.blankCheckersImg);
                         break;
                     default:
                         break;
@@ -93,6 +96,9 @@ public class Tile {
                         break;
                     case BLACKKING:
                         tileButton.setIcon(Icons.blackKingImg);
+                        break;
+                    case BLANK:
+                        tileButton.setIcon(Icons.blankCheckersImg);
                         break;
                     default:
                         break;
