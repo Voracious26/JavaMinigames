@@ -1,11 +1,14 @@
 package checkers;
 
+import checkers.Checker.CHECKER;
 import java.awt.event.ActionEvent;
 import javaminigames.Icons;
+import javaminigames.Settings;
 import javax.swing.*;
 
 public class Tile {
     private char state = ' ';
+    private boolean selected = false;
     private JButton tileButton;
     private Board parent;
     
@@ -16,23 +19,34 @@ public class Tile {
         tileButton.addActionListener((ActionEvent e) -> {
             Checker thisChecker = parent.getCheckerForCoords(parent.getCoordsForTile(this));
             if(thisChecker != null){
-            
+                if(Settings.CHECKERS_PLAYASBLACK){
+                    if(thisChecker.getType() == CHECKER.BLACK || thisChecker.getType() == CHECKER.BLACKKING){
+                        selected = true;
+                    }
+                }
+                else{
+                    if(thisChecker.getType() == CHECKER.RED || thisChecker.getType() == CHECKER.REDKING){
+                        selected = true;
+                    }
+                }
             }
-            switch(state){
-                case 'r':
-                    tileButton.setIcon(Icons.redSelectedImg);
-                    break;
-                case 'j':
-                    tileButton.setIcon(Icons.redKingSelectedImg);
-                    break;
-                case 'b':
-                    tileButton.setIcon(Icons.blackSelectedImg);
-                    break;
-                case 'k':
-                    tileButton.setIcon(Icons.blackKingSelectedImg);
-                    break;
-                default:
-                    break;
+            if(selected){
+                switch(state){
+                    case 'r':
+                        tileButton.setIcon(Icons.redSelectedImg);
+                        break;
+                    case 'j':
+                        tileButton.setIcon(Icons.redKingSelectedImg);
+                        break;
+                    case 'b':
+                        tileButton.setIcon(Icons.blackSelectedImg);
+                        break;
+                    case 'k':
+                        tileButton.setIcon(Icons.blackKingSelectedImg);
+                        break;
+                    default:
+                        break;
+                }
             }
         });
     }

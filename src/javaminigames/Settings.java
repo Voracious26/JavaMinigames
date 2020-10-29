@@ -13,6 +13,9 @@ public class Settings implements ItemListener {
     public static int TICTACTOE_BOARDSIZE = 3;
     public static boolean TICTACTOE_SMARTAI = false;
     
+    // CHECKERS 
+    public static boolean CHECKERS_PLAYASBLACK = false;
+    
     JPanel settingsPanel;
     JLabel[] headers;
     String[] headerText = {"TicTacToe Settings", "Checkers Settings", "Chess Settings"};
