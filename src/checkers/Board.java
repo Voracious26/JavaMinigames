@@ -4,6 +4,7 @@ import checkers.Checker.CHECKER;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import javaminigames.Icons;
 import javax.swing.JPanel;
 
 public class Board {
@@ -116,6 +117,43 @@ public class Board {
                 tmp = blackCheckers.get(i);
                 if(tmp.getX() == coords[0] && tmp.getY() == coords[1]){
                     return tmp;
+                }
+            }
+        }
+        return null;
+    }
+    
+    public void showPossibleMoves(Tile tile){
+        int[] tmp = getCoordsForTile(tile);
+        if(tmp[0] > 0 && tmp[1] > 0){
+            if(tiles[tmp[0]-1][tmp[1]-1].getState() == CHECKER.BLANK){
+                tiles[tmp[0]-1][tmp[1]-1].setIcon(Icons.possibleMoveImg);
+            }
+        }
+        if(tmp[0] > 0 && tmp[1] < boardSize - 1){
+            if(tiles[tmp[0]-1][tmp[1]+1].getState() == CHECKER.BLANK){
+                tiles[tmp[0]-1][tmp[1]+1].setIcon(Icons.possibleMoveImg);
+            }
+        }
+        if(getCheckerForCoords(tmp).getType() == CHECKER.REDKING || getCheckerForCoords(tmp).getType() == CHECKER.BLACKKING){
+            if(tmp[0] < boardSize - 1 && tmp[1] > 0){
+                if(tiles[tmp[0]+1][tmp[1]-1].getState() == CHECKER.BLANK){
+                    tiles[tmp[0]+1][tmp[1]-1].setIcon(Icons.possibleMoveImg);
+                }
+            }
+            if(tmp[0] < boardSize - 1 && tmp[1] < boardSize - 1){
+                if(tiles[tmp[0]+1][tmp[1]+1].getState() == CHECKER.BLANK){
+                    tiles[tmp[0]+1][tmp[1]+1].setIcon(Icons.possibleMoveImg);
+                }
+            }
+        }
+    }
+    
+    public Tile getSelectedTile(){
+        for(int i = 0; i < boardSize; ++i){
+            for(int j = 0; j < boardSize; ++j){
+                if(tiles[i][j].getSelected() == true){
+                    return tiles[i][j];
                 }
             }
         }

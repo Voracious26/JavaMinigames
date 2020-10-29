@@ -39,6 +39,8 @@ public class Icons {
     
     private static String blankCheckersImgUrl = "res/blank.png";
     public static ImageIcon blankCheckersImg;
+    private static String possibleMoveImgUrl = "res/checkers/possibleMove.png";
+    public static ImageIcon possibleMoveImg;
     
     public static void initializeIcons(){        
         // tictactoe
@@ -58,6 +60,7 @@ public class Icons {
         blackKingSelectedImg = scaleIcon(blackKingSelectedImgUrl, checkersImgSize, checkersImgSize);
         
         blankCheckersImg = scaleIcon(blankCheckersImgUrl, checkersImgSize, checkersImgSize);
+        possibleMoveImg = scaleIcon(possibleMoveImgUrl, checkersImgSize, checkersImgSize);
     }
         
     public static ImageIcon scaleIcon(String url, int width, int height){

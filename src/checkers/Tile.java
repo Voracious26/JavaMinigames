@@ -19,6 +19,9 @@ public class Tile {
         
         tileButton.addActionListener((ActionEvent e) -> {
             Checker thisChecker = parent.getCheckerForCoords(parent.getCoordsForTile(this));
+            if(parent.getSelectedTile() != this){
+                parent.deselectAll();
+            }
             if(thisChecker != null){
                 if(Settings.CHECKERS_PLAYASBLACK){
                     if(thisChecker.getType() == CHECKER.BLACK || thisChecker.getType() == CHECKER.BLACKKING){
@@ -31,11 +34,10 @@ public class Tile {
                     }
                 }
             }
-            if(selected){
-                parent.deselectAll();
-                selected = true;                        
-            }
             updateIcon();
+            if(thisChecker != null){
+                parent.showPossibleMoves(this);
+            }
         });
     }
         
@@ -60,7 +62,10 @@ public class Tile {
     public void clearIcon(){
         tileButton.setIcon(null);
     }
-        
+     
+    public void setIcon(ImageIcon img){
+        tileButton.setIcon(img);
+    }
     public void updateIcon(){
         if(selected){
                 switch(state){
