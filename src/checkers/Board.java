@@ -45,28 +45,38 @@ public class Board {
     public void clearBoard(){
         for(int i = 0; i < boardSize; ++i){
             for(int j = 0; j < boardSize; ++j){
-                tiles[i][j].setState(' ');
-                tiles[i][j].clearIcon();
+                tiles[i][j].setState(CHECKER.BLANK);
+                tiles[i][j].updateIcon();
             }
         }
+    }
+    
+    public void deselectAll(){
+        for(int i = 0; i < boardSize; ++i){
+            for(int j = 0; j < boardSize; ++j){
+                tiles[i][j].setSelected(false);
+                tiles[i][j].updateIcon();
+            }
+        }
+    
     }
     
     public void updateBoard(){
         clearBoard();
         for(Checker c : redCheckers){
             if(c.getType() == CHECKER.REDKING){
-                tiles[c.getX()][c.getY()].setState('j');                
+                tiles[c.getX()][c.getY()].setState(CHECKER.REDKING);                
             }
             else if(c.getType() == CHECKER.RED){
-                tiles[c.getX()][c.getY()].setState('r'); 
+                tiles[c.getX()][c.getY()].setState(CHECKER.RED); 
             }            
         }
         for(Checker c : blackCheckers){
             if(c.getType() == CHECKER.BLACKKING){
-                tiles[c.getX()][c.getY()].setState('k');                
+                tiles[c.getX()][c.getY()].setState(CHECKER.BLACKKING);                
             }
             else if(c.getType() == CHECKER.BLACK){
-                tiles[c.getX()][c.getY()].setState('b'); 
+                tiles[c.getX()][c.getY()].setState(CHECKER.BLACK); 
             }            
         }
         for(int i = 0; i < boardSize; ++i){

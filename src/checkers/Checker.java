@@ -14,7 +14,8 @@ public class Checker {
         RED,
         REDKING,
         BLACK,
-        BLACKKING
+        BLACKKING,
+        BLANK
     }
     
     private int x;

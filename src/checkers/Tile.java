@@ -1,13 +1,14 @@
 package checkers;
 
 import checkers.Checker.CHECKER;
+import static checkers.Checker.CHECKER;
 import java.awt.event.ActionEvent;
 import javaminigames.Icons;
 import javaminigames.Settings;
 import javax.swing.*;
 
 public class Tile {
-    private char state = ' ';
+    private CHECKER state = CHECKER.BLANK;
     private boolean selected = false;
     private JButton tileButton;
     private Board parent;
@@ -31,31 +32,25 @@ public class Tile {
                 }
             }
             if(selected){
-                switch(state){
-                    case 'r':
-                        tileButton.setIcon(Icons.redSelectedImg);
-                        break;
-                    case 'j':
-                        tileButton.setIcon(Icons.redKingSelectedImg);
-                        break;
-                    case 'b':
-                        tileButton.setIcon(Icons.blackSelectedImg);
-                        break;
-                    case 'k':
-                        tileButton.setIcon(Icons.blackKingSelectedImg);
-                        break;
-                    default:
-                        break;
-                }
+                parent.deselectAll();
+                selected = true;                        
             }
+            updateIcon();
         });
     }
         
-    public char getState(){
+    public CHECKER getState(){
         return state;
     }
-    public void setState(char newState){
+    public void setState(CHECKER newState){
         state = newState;
+    }
+    
+    public boolean getSelected(){
+        return selected;
+    }
+    public void setSelected(boolean newSelected){
+        selected = newSelected;
     }
     
     public JButton getButton(){
@@ -66,21 +61,42 @@ public class Tile {
         tileButton.setIcon(null);
     }
         
-    public void updateIcon(){
-        if(state == 'r'){
-            tileButton.setIcon(Icons.redImg);
+    public void updateIcon(){            
+        if(selected){
+                switch(state){
+                    case RED:
+                        tileButton.setIcon(Icons.redSelectedImg);
+                        break;
+                    case REDKING:
+                        tileButton.setIcon(Icons.redKingSelectedImg);
+                        break;
+                    case BLACK:
+                        tileButton.setIcon(Icons.blackSelectedImg);
+                        break;
+                    case BLACKKING:
+                        tileButton.setIcon(Icons.blackKingSelectedImg);
+                        break;
+                    default:
+                        break;
+                }
         }
-        else if(state == 'j'){
-            tileButton.setIcon(Icons.redKingImg);
-        }
-        else if(state == 'b'){
-            tileButton.setIcon(Icons.blackImg);
-        }
-        else if(state == 'k'){
-            tileButton.setIcon(Icons.blackKingImg);
-        }
-        else if(state == ' '){
-            tileButton.setIcon(Icons.blankCheckersImg);
+        else{
+            switch(state){
+                    case RED:
+                        tileButton.setIcon(Icons.redImg);
+                        break;
+                    case REDKING:
+                        tileButton.setIcon(Icons.redKingImg);
+                        break;
+                    case BLACK:
+                        tileButton.setIcon(Icons.blackImg);
+                        break;
+                    case BLACKKING:
+                        tileButton.setIcon(Icons.blackKingImg);
+                        break;
+                    default:
+                        break;
+            }
         }
     }
 }
