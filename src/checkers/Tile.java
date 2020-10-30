@@ -26,9 +26,23 @@ public class Tile {
                     if(this.state == CHECKER.BLANK){
                         Checker checkerToMove;
                         checkerToMove = parent.getCheckerForCoords(parent.getCoordsForTile(selectedTile));
-                        checkerToMove.setX(parent.getCoordsForTile(this)[0]);
-                        checkerToMove.setY(parent.getCoordsForTile(this)[1]);
-                        parent.updateBoard();
+                        
+                        int oldCoords[] = new int[]{checkerToMove.getX(), checkerToMove.getY()};
+                        int newCoords[] = parent.getCoordsForTile(this);
+                        
+                        boolean canMove = false;
+                        
+                        if(newCoords[0] == oldCoords[0] - 1){
+                            if(newCoords[1] == oldCoords[1] - 1 || newCoords[1] == oldCoords[1] + 1){
+                                canMove = true;
+                            }
+                        }
+                        
+                        if(canMove){
+                            checkerToMove.setX(parent.getCoordsForTile(this)[0]);
+                            checkerToMove.setY(parent.getCoordsForTile(this)[1]);
+                            parent.updateBoard();
+                        }
                     }
                 }
             }
