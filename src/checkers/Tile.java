@@ -22,7 +22,9 @@ public class Tile {
             Tile selectedTile = parent.getSelectedTile();
             
             if(selectedTile != null){
-                if((selectedTile.getState() == CHECKER.BLACK && Settings.CHECKERS_PLAYASBLACK) || (selectedTile.getState() == CHECKER.RED && !Settings.CHECKERS_PLAYASBLACK)){
+                CHECKER sState = selectedTile.getState();
+                if((sState == CHECKER.BLACK || sState == CHECKER.BLACKKING && Settings.CHECKERS_PLAYASBLACK) || 
+                        ((sState == CHECKER.RED || sState == CHECKER.REDKING) && !Settings.CHECKERS_PLAYASBLACK)){
                     if(this.state == CHECKER.BLANK){
                         Checker checkerToMove;
                         checkerToMove = parent.getCheckerForCoords(parent.getCoordsForTile(selectedTile));
@@ -35,6 +37,13 @@ public class Tile {
                         if(newCoords[0] == oldCoords[0] - 1){
                             if(newCoords[1] == oldCoords[1] - 1 || newCoords[1] == oldCoords[1] + 1){
                                 canMove = true;
+                            }
+                        }
+                        if(checkerToMove.getType() == CHECKER.REDKING || checkerToMove.getType() == CHECKER.BLACKKING){
+                            if(newCoords[0] == oldCoords[0] + 1){
+                                if(newCoords[1] == oldCoords[1] - 1 || newCoords[1] == oldCoords[1] + 1){
+                                    canMove = true;
+                                }
                             }
                         }
                         
@@ -54,7 +63,6 @@ public class Tile {
                 parent.deselectAll();
             }
             if(thisChecker != null){
-                System.out.println(this.getState());
                 if(Settings.CHECKERS_PLAYASBLACK){
                     if(thisChecker.getType() == CHECKER.BLACK || thisChecker.getType() == CHECKER.BLACKKING){
                         selected = true;
@@ -106,7 +114,6 @@ public class Tile {
                         break;
                     case REDKING:
                         tileButton.setIcon(Icons.redKingSelectedImg);
-                        System.out.println("FDSFASDAFSDDASF");
                         break;
                     case BLACK:
                         tileButton.setIcon(Icons.blackSelectedImg);
