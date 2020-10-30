@@ -48,4 +48,16 @@ public class Checker {
     public void setType(CHECKER newType){
         type = newType;
     }
+    
+    
+    public void king(){
+        switch(type){
+            case RED:
+                type = CHECKER.REDKING;
+                break;
+            case BLACK:
+                type = CHECKER.BLACKKING;
+                break;
+        }
+    }
 }

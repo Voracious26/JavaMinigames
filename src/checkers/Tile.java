@@ -39,8 +39,12 @@ public class Tile {
                         }
                         
                         if(canMove){
-                            checkerToMove.setX(parent.getCoordsForTile(this)[0]);
-                            checkerToMove.setY(parent.getCoordsForTile(this)[1]);
+                            checkerToMove.setX(newCoords[0]);
+                            checkerToMove.setY(newCoords[1]);
+                            if(newCoords[0] == 0 && !(checkerToMove.getType() == CHECKER.REDKING || checkerToMove.getType() == CHECKER.BLACKKING)){
+                                checkerToMove.king();
+                                king();
+                            }
                             parent.updateBoard();
                         }
                     }
@@ -50,6 +54,7 @@ public class Tile {
                 parent.deselectAll();
             }
             if(thisChecker != null){
+                System.out.println(this.getState());
                 if(Settings.CHECKERS_PLAYASBLACK){
                     if(thisChecker.getType() == CHECKER.BLACK || thisChecker.getType() == CHECKER.BLACKKING){
                         selected = true;
@@ -89,7 +94,7 @@ public class Tile {
     public void clearIcon(){
         tileButton.setIcon(null);
     }
-     
+
     public void setIcon(ImageIcon img){
         tileButton.setIcon(img);
     }
@@ -101,6 +106,7 @@ public class Tile {
                         break;
                     case REDKING:
                         tileButton.setIcon(Icons.redKingSelectedImg);
+                        System.out.println("FDSFASDAFSDDASF");
                         break;
                     case BLACK:
                         tileButton.setIcon(Icons.blackSelectedImg);
@@ -135,6 +141,16 @@ public class Tile {
                     default:
                         break;
             }
+        }
+    }
+    public void king(){
+        switch(state){
+            case RED:
+                state = CHECKER.REDKING;
+                break;
+            case BLACK:
+                state = CHECKER.BLACKKING;
+                break;
         }
     }
 }

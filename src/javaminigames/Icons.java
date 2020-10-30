@@ -22,7 +22,7 @@ public class Icons {
     private static String blackImgUrl = "res/checkers/blackChecker.png";
     private static String blackKingImgUrl  = "res/checkers/blackCheckerKing.png";
     private static String redImgUrl = "res/checkers/redChecker.png";
-    private static String redKingImgUrl = "res/checkers/redChecker.png"; 
+    private static String redKingImgUrl = "res/checkers/redCheckerKing.png"; 
     public static ImageIcon blackImg;
     public static ImageIcon blackKingImg;
     public static ImageIcon redImg;
@@ -31,7 +31,7 @@ public class Icons {
     private static String blackSelectedImgUrl = "res/checkers/blackChecker_selected.png";
     private static String blackKingSelectedImgUrl  = "res/checkers/blackCheckerKing_selected.png";
     private static String redSelectedImgUrl = "res/checkers/redChecker_selected.png";
-    private static String redKingImgSelectedUrl = "res/checkers/redChecker_selected.png"; 
+    private static String redKingImgSelectedUrl = "res/checkers/redCheckerKing_selected.png"; 
     public static ImageIcon blackSelectedImg;
     public static ImageIcon blackKingSelectedImg;
     public static ImageIcon redSelectedImg;
