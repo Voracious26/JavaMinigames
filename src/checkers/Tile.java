@@ -19,7 +19,20 @@ public class Tile {
         
         tileButton.addActionListener((ActionEvent e) -> {
             Checker thisChecker = parent.getCheckerForCoords(parent.getCoordsForTile(this));
-            if(parent.getSelectedTile() != this){
+            Tile selectedTile = parent.getSelectedTile();
+            
+            if(selectedTile != null){
+                if((selectedTile.getState() == CHECKER.BLACK && Settings.CHECKERS_PLAYASBLACK) || (selectedTile.getState() == CHECKER.RED && !Settings.CHECKERS_PLAYASBLACK)){
+                    if(this.state == CHECKER.BLANK){
+                        Checker checkerToMove;
+                        checkerToMove = parent.getCheckerForCoords(parent.getCoordsForTile(selectedTile));
+                        checkerToMove.setX(parent.getCoordsForTile(this)[0]);
+                        checkerToMove.setY(parent.getCoordsForTile(this)[1]);
+                        parent.updateBoard();
+                    }
+                }
+            }
+            if(selectedTile != this){
                 parent.deselectAll();
             }
             if(thisChecker != null){
