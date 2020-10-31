@@ -30,11 +30,11 @@ public class Board {
             redCheckers.add(new Checker(boardSize-3, i, CHECKER.RED));
         }
                 
-        /**for(int i = 0; i < boardSize; i+=2){
-            blackCheckers.add(new Checker(0, i+1, CHECKER.BLACK));
+        for(int i = 0; i < boardSize; i+=2){
+            //blackCheckers.add(new Checker(0, i+1, CHECKER.BLACK));
             blackCheckers.add(new Checker(1, i, CHECKER.BLACK));
-            blackCheckers.add(new Checker(2, i+1, CHECKER.BLACK));
-        }**/
+            //blackCheckers.add(new Checker(2, i+1, CHECKER.BLACK));
+        }
         updateBoard();
     }
     

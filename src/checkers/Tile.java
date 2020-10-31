@@ -3,6 +3,7 @@ package checkers;
 import checkers.Checker.CHECKER;
 import static checkers.Checker.CHECKER;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import javaminigames.Icons;
 import javaminigames.Settings;
 import javax.swing.*;
@@ -19,9 +20,15 @@ public class Tile {
         
         tileButton.addActionListener((ActionEvent e) -> {
             Checker thisChecker = parent.getCheckerForCoords(parent.getCoordsForTile(this));
+            ArrayList<Move> possibleMoves = Checker.generateMovesArray(thisChecker, parent);
+            for(Move move : possibleMoves){
+                
+            }
+            Checker.printMovesArray(possibleMoves);
             Tile selectedTile = parent.getSelectedTile();
             
             if(selectedTile != null){
+                
                 CHECKER sState = selectedTile.getState();
                 // if the selected tile is one of the player's tiles
                 if(Checker.isPlayers(sState)){

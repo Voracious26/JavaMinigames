@@ -5,6 +5,8 @@
  */
 package checkers;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import javaminigames.Settings;
 
 /**
@@ -51,6 +53,10 @@ public class Checker {
         type = newType;
     }
     
+    public int[] getCoords(){
+        int[] tmp = new int[]{x, y};
+        return tmp;
+    }
     
     public void king(){
         switch(type){
@@ -78,10 +84,114 @@ public class Checker {
         return false;
     }
     
+    public static boolean isOpponent(CHECKER thisChecker, CHECKER otherChecker){
+        if(thisChecker == CHECKER.BLACK || thisChecker == CHECKER.BLACKKING){
+            if(otherChecker == CHECKER.RED || otherChecker == CHECKER.REDKING){
+                return true;
+            }
+        }
+        else if(thisChecker == CHECKER.RED || thisChecker == CHECKER.REDKING){
+            if(otherChecker == CHECKER.BLACK || otherChecker == CHECKER.BLACKKING){
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public static boolean isPlayers(CHECKER checker){
         if(!isOpponent(checker) && checker != CHECKER.BLANK){
             return true;
         }
         return false;
+    }
+    
+    public static ArrayList<Move> generateMovesArray(Checker checkerToMove, Board b){
+        ArrayList<Move> moves = new ArrayList<>();
+        
+        if(checkerToMove == null){
+            return moves;
+        }
+        else{
+            int oldCoords[] = new int[]{checkerToMove.getX(), checkerToMove.getY()};
+            int newCoords[] = new int[2];
+            
+            // regular moves
+            newCoords[0] = oldCoords[0] - 1;
+            newCoords[1] = oldCoords[1] - 1;
+            if(oldCoords[0] > 0 && oldCoords[1] > 0){
+                if(b.tiles[newCoords[0]][newCoords[1]].getState() == CHECKER.BLANK){
+                    moves.add(new Move(oldCoords, newCoords, false));
+                }
+            }
+            
+            newCoords[0] = oldCoords[0] - 1;
+            newCoords[1] = oldCoords[1] + 1;            
+            if(oldCoords[0] > 0 && oldCoords[1] < b.boardSize-1){
+                if(b.tiles[newCoords[0]][newCoords[1]].getState() == CHECKER.BLANK){
+                    moves.add(new Move(oldCoords, newCoords, false));
+                }
+            }   
+            
+            // king moves
+            if(checkerToMove.getType() == CHECKER.BLACKKING || checkerToMove.getType() == CHECKER.REDKING){           
+                newCoords[0] = oldCoords[0] + 1;
+                newCoords[1] = oldCoords[1] - 1;
+                if(oldCoords[0] < b.boardSize-1 && oldCoords[1] > 0){
+                    if(b.tiles[newCoords[0]][newCoords[1]].getState() == CHECKER.BLANK){
+                        moves.add(new Move(oldCoords, newCoords, false));
+                    }
+                }
+                newCoords[1] = oldCoords[1] + 1;
+                if(oldCoords[0] < b.boardSize-1 && oldCoords[1] < b.boardSize-1){
+                    if(b.tiles[newCoords[0]][newCoords[1]].getState() == CHECKER.BLANK){
+                        moves.add(new Move(oldCoords, newCoords, false));
+                    }
+                }
+            
+            }
+
+            // regular captures
+            Checker checkerToCapture;  
+            newCoords[0] = oldCoords[0] + 2;
+            newCoords[1] = oldCoords[1] + 2;
+            checkerToCapture = b.getCheckerForCoords(new int[] {(newCoords[0]+oldCoords[0])/2, (newCoords[1]+oldCoords[1])/2});
+            if(checkerToCapture != null){
+                if(isOpponent(checkerToMove.getType(), checkerToCapture.getType())){
+                    moves.add(new Move(oldCoords, newCoords, true));
+                }
+            }
+            newCoords[1] = oldCoords[1] - 2;
+            checkerToCapture = b.getCheckerForCoords(new int[] {(newCoords[0]+oldCoords[0])/2, (newCoords[1]+oldCoords[1])/2});
+            if(checkerToCapture != null){
+                if(isOpponent(checkerToMove.getType(), checkerToCapture.getType())){
+                    moves.add(new Move(oldCoords, newCoords, true));
+                }
+            }
+            
+            // king captures
+            newCoords[0] = oldCoords[0] - 2;
+            newCoords[1] = oldCoords[1] + 2;
+            checkerToCapture = b.getCheckerForCoords(new int[] {(newCoords[0]+oldCoords[0])/2, (newCoords[1]+oldCoords[1])/2});
+            if(checkerToCapture != null){
+                if(isOpponent(checkerToMove.getType(), checkerToCapture.getType())){
+                    moves.add(new Move(oldCoords, newCoords, true));
+                }
+            }
+            newCoords[1] = oldCoords[1] - 2;
+            checkerToCapture = b.getCheckerForCoords(new int[] {(newCoords[0]+oldCoords[0])/2, (newCoords[1]+oldCoords[1])/2});
+            if(checkerToCapture != null){
+                if(isOpponent(checkerToMove.getType(), checkerToCapture.getType())){
+                    moves.add(new Move(oldCoords, newCoords, true));
+                }
+            }
+        }
+        return moves;
+    }
+    
+    public static void printMovesArray(ArrayList<Move> moves){
+        System.out.println("Printing moves...");
+        for(Move move : moves){
+            System.out.println("Move from "+Arrays.toString(move.src)+" to "+Arrays.toString(move.dst)+", capturing: "+move.capt);
+        }
     }
 }
