@@ -154,14 +154,14 @@ public class Board {
         int[] tmp = getCoordsForTile(tile);
         if(tmp[0] > 1 && tmp[1] > 1){
             if(tiles[tmp[0]-2][tmp[1]-2].getState() == CHECKER.BLANK){
-                if(isOpponent(tiles[tmp[0]-1][tmp[1]-1].getState())){
+                if(Checker.isOpponent(tiles[tmp[0]-1][tmp[1]-1].getState())){
                     tiles[tmp[0]-2][tmp[1]-2].setIcon(Icons.possibleCaptureImg);
                 }
             }
         }
         if(tmp[0] > 1 && tmp[1] < boardSize - 2){
             if(tiles[tmp[0]-2][tmp[1]+2].getState() == CHECKER.BLANK){
-                if(isOpponent(tiles[tmp[0]-1][tmp[1]+1].getState())){
+                if(Checker.isOpponent(tiles[tmp[0]-1][tmp[1]+1].getState())){
                     tiles[tmp[0]-2][tmp[1]+2].setIcon(Icons.possibleCaptureImg);
                 }
             }
@@ -170,33 +170,20 @@ public class Board {
         if(getCheckerForCoords(tmp).getType() == CHECKER.REDKING || getCheckerForCoords(tmp).getType() == CHECKER.BLACKKING){
             if(tmp[0] < boardSize - 2 && tmp[1] > 1){
                 if(tiles[tmp[0]+2][tmp[1]-2].getState() == CHECKER.BLANK){
-                    if(isOpponent(tiles[tmp[0]+1][tmp[1]-1].getState())){
+                    if(Checker.isOpponent(tiles[tmp[0]+1][tmp[1]-1].getState())){
                         tiles[tmp[0]+2][tmp[1]-2].setIcon(Icons.possibleCaptureImg);
                     }
                 }
             }
             if(tmp[0] < boardSize - 2 && tmp[1] < boardSize - 2){
                 if(tiles[tmp[0]+2][tmp[1]+2].getState() == CHECKER.BLANK){
-                    if(isOpponent(tiles[tmp[0]+1][tmp[1]+1].getState())){
+                    if(Checker.isOpponent(tiles[tmp[0]+1][tmp[1]+1].getState())){
                         tiles[tmp[0]+2][tmp[1]+2].setIcon(Icons.possibleCaptureImg);
                     }
                 }
             }
         }
     
-    }
-    public boolean isOpponent(CHECKER checker){
-        if(checker == CHECKER.BLACK || checker == CHECKER.BLACKKING){
-            if(!Settings.CHECKERS_PLAYASBLACK){
-                return true;
-            }
-        }
-        else if(checker == CHECKER.RED || checker == CHECKER.REDKING){
-            if(Settings.CHECKERS_PLAYASBLACK){
-                return true;
-            }
-        }
-        return false;
     }
     
     public Tile getSelectedTile(){

@@ -5,6 +5,8 @@
  */
 package checkers;
 
+import javaminigames.Settings;
+
 /**
  *
  * @author harri
@@ -59,5 +61,27 @@ public class Checker {
                 type = CHECKER.BLACKKING;
                 break;
         }
+    }
+    
+    
+    public static boolean isOpponent(CHECKER checker){
+        if(checker == CHECKER.BLACK || checker == CHECKER.BLACKKING){
+            if(!Settings.CHECKERS_PLAYASBLACK){
+                return true;
+            }
+        }
+        else if(checker == CHECKER.RED || checker == CHECKER.REDKING){
+            if(Settings.CHECKERS_PLAYASBLACK){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public static boolean isPlayers(CHECKER checker){
+        if(!isOpponent(checker) && checker != CHECKER.BLANK){
+            return true;
+        }
+        return false;
     }
 }

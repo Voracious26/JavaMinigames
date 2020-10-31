@@ -23,8 +23,9 @@ public class Tile {
             
             if(selectedTile != null){
                 CHECKER sState = selectedTile.getState();
-                if((sState == CHECKER.BLACK || sState == CHECKER.BLACKKING && Settings.CHECKERS_PLAYASBLACK) || 
-                        ((sState == CHECKER.RED || sState == CHECKER.REDKING) && !Settings.CHECKERS_PLAYASBLACK)){
+                // if the selected tile is one of the player's tiles
+                if(Checker.isPlayers(sState)){
+                    // if a blank space is clicked, try to move the selected checker to it
                     if(this.state == CHECKER.BLANK){
                         Checker checkerToMove;
                         checkerToMove = parent.getCheckerForCoords(parent.getCoordsForTile(selectedTile));
