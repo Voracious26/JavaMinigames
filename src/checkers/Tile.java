@@ -34,7 +34,9 @@ public class Tile {
                         int newCoords[] = parent.getCoordsForTile(this);
                         
                         boolean canMove = false;
+                        int[] capturing = new int[]{-1, -1};
                         
+                        // see if we can move
                         if(newCoords[0] == oldCoords[0] - 1){
                             if(newCoords[1] == oldCoords[1] - 1 || newCoords[1] == oldCoords[1] + 1){
                                 canMove = true;
@@ -48,12 +50,52 @@ public class Tile {
                             }
                         }
                         
+                        // see if we can capture
+                        if(newCoords[0] == oldCoords[0] - 2){
+                            if(newCoords[1] == oldCoords[1] - 2){
+                                if(Checker.isOpponent(parent.tiles[oldCoords[0]-1][oldCoords[1]-1].getState())){
+                                    canMove = true;
+                                    capturing[0] = oldCoords[0]-1;
+                                    capturing[1] = oldCoords[1]-1;
+                                    
+                                }
+                            }
+                            else if(newCoords[1] == oldCoords[1] + 2){
+                                if(Checker.isOpponent(parent.tiles[oldCoords[0]-1][oldCoords[1]+1].getState())){
+                                    canMove = true;
+                                    capturing[0] = oldCoords[0]-1;
+                                    capturing[1] = oldCoords[1]+1;
+                                }
+                            }
+                        }
+                        if(checkerToMove.getType() == CHECKER.REDKING || checkerToMove.getType() == CHECKER.BLACKKING){
+                            if(newCoords[0] == oldCoords[0] + 2){
+                                if(newCoords[1] == oldCoords[1] - 2){
+                                    if(Checker.isOpponent(parent.tiles[oldCoords[0]+1][oldCoords[1]-1].getState())){
+                                        canMove = true;
+                                        capturing[0] = oldCoords[0]+1;
+                                        capturing[1] = oldCoords[1]-1;
+                                    }
+                                }
+                                else if(newCoords[1] == oldCoords[1] + 2){
+                                    if(Checker.isOpponent(parent.tiles[oldCoords[0]+1][oldCoords[1]+1].getState())){
+                                        canMove = true;
+                                        capturing[0] = oldCoords[0]+1;
+                                        capturing[1] = oldCoords[1]+1;
+                                    }
+                                }
+                            }
+                        }
+                        
                         if(canMove){
                             checkerToMove.setX(newCoords[0]);
                             checkerToMove.setY(newCoords[1]);
                             if(newCoords[0] == 0 && !(checkerToMove.getType() == CHECKER.REDKING || checkerToMove.getType() == CHECKER.BLACKKING)){
                                 checkerToMove.king();
                                 king();
+                            }
+                            if(capturing[0] != -1){
+                                parent.removeChecker(parent.getCheckerForCoords(capturing));
                             }
                             parent.updateBoard();
                         }

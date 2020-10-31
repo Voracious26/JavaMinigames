@@ -196,4 +196,13 @@ public class Board {
         }
         return null;
     }
+    
+    public void removeChecker(Checker toRemove){
+        if(toRemove.getType() == CHECKER.BLACK || toRemove.getType() == CHECKER.BLACKKING){
+            blackCheckers.remove(toRemove);
+        }
+        else{
+            redCheckers.remove(toRemove);
+        }
+    }
 }
