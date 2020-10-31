@@ -77,6 +77,7 @@ public class Tile {
             updateIcon();
             if(thisChecker != null){
                 parent.showPossibleMoves(this);
+                parent.showPossibleCaptures(this);
             }
         });
     }
