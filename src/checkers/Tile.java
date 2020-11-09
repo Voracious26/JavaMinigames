@@ -19,11 +19,13 @@ public class Tile {
         tileButton = new JButton();
         
         tileButton.addActionListener((ActionEvent e) -> {
+            handleClick();
+        });
+    }
+        
+    public void handleClick(){    
             Checker thisChecker = parent.getCheckerForCoords(parent.getCoordsForTile(this));
             ArrayList<Move> possibleMoves = Checker.generateMovesArray(thisChecker, parent);
-            for(Move move : possibleMoves){
-                
-            }
             Checker.printMovesArray(possibleMoves);
             Tile selectedTile = parent.getSelectedTile();
             
@@ -129,9 +131,9 @@ public class Tile {
                 parent.showPossibleMoves(this);
                 parent.showPossibleCaptures(this);
             }
-        });
+    
     }
-        
+    
     public CHECKER getState(){
         return state;
     }

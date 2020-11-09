@@ -1,5 +1,8 @@
 
 package checkers;
+
+import java.util.Arrays;
+
 public class Move {
     public int[] src = new int[]{-1,-1};
     public int[] dst = new int[]{-1,-1};
@@ -22,5 +25,9 @@ public class Move {
         dst[1] = newDst[1];
     }
     
+    @Override
+    public String toString(){
+        return "Move from "+Arrays.toString(src)+" to "+Arrays.toString(dst)+", capturing: "+capt;
+    }
     
 }

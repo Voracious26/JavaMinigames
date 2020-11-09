@@ -191,7 +191,7 @@ public class Checker {
     public static void printMovesArray(ArrayList<Move> moves){
         System.out.println("Printing moves...");
         for(Move move : moves){
-            System.out.println("Move from "+Arrays.toString(move.src)+" to "+Arrays.toString(move.dst)+", capturing: "+move.capt);
+            System.out.println(move.toString());
         }
     }
 }
