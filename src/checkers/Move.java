@@ -25,6 +25,13 @@ public class Move {
         dst[1] = newDst[1];
     }
     
+    public int[] getCaptCoords(){
+        int x = (src[0]+dst[0])/2;
+        int y = (src[1]+dst[1])/2;
+        int out[] = new int[]{x,y};
+        return out;
+    }
+    
     @Override
     public String toString(){
         return "Move from "+Arrays.toString(src)+" to "+Arrays.toString(dst)+", capturing: "+capt;

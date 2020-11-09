@@ -158,4 +158,14 @@ public class Board {
             tiles[move.dst[0]][move.dst[1]].setIcon(iconToSet);
         }
     }
+    
+    public void makeMove(Move move){
+        Checker toMove = getCheckerForCoords(move.src);
+        toMove.setX(move.dst[0]);
+        toMove.setY(move.dst[1]);
+        if(move.capt){
+            Checker toRemove = getCheckerForCoords(move.getCaptCoords());
+            removeChecker(toRemove);
+        }
+    }
 }
