@@ -27,9 +27,12 @@ public class Tile {
             Checker thisChecker = parent.getCheckerForCoords(parent.getCoordsForTile(this));
             ArrayList<Move> possibleMoves = Checker.generateMovesArray(thisChecker, parent);
             Checker.printMovesArray(possibleMoves);
-            Tile selectedTile = parent.getSelectedTile();
+            parent.displayMoves(possibleMoves);
             
-            if(selectedTile != null){
+            //Tile selectedTile = parent.getSelectedTile();
+            
+            
+            /**if(selectedTile != null){
                 
                 CHECKER sState = selectedTile.getState();
                 // if the selected tile is one of the player's tiles
@@ -130,7 +133,7 @@ public class Tile {
             if(thisChecker != null){
                 parent.showPossibleMoves(this);
                 parent.showPossibleCaptures(this);
-            }
+            }**/
     
     }
     
