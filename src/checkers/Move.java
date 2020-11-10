@@ -32,6 +32,17 @@ public class Move {
         return out;
     }
     
+    public Boolean isEqual(Move move){
+        Boolean out = true;
+        if(move.src[0] != src[0] || move.src[1] != src[1]){
+            out = false;
+        }
+        if(move.dst[0] != dst[0] || move.dst[1] != dst[1]){
+            out = false;
+        }
+        return out;
+    }
+    
     @Override
     public String toString(){
         return "Move from "+Arrays.toString(src)+" to "+Arrays.toString(dst)+", capturing: "+capt;

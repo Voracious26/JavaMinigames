@@ -4,6 +4,7 @@ import checkers.Checker.CHECKER;
 import static checkers.Checker.CHECKER;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javaminigames.Icons;
 import javaminigames.Settings;
 import javax.swing.*;
@@ -25,116 +26,53 @@ public class Tile {
         
     public void handleClick(){    
             Checker thisChecker = parent.getCheckerForCoords(parent.getCoordsForTile(this));
-            ArrayList<Move> possibleMoves = Checker.generateMovesArray(thisChecker, parent);
-            Checker.printMovesArray(possibleMoves);
-            parent.displayMoves(possibleMoves);
-            
-            //Tile selectedTile = parent.getSelectedTile();
-            
-            
-            /**if(selectedTile != null){
-                
-                CHECKER sState = selectedTile.getState();
-                // if the selected tile is one of the player's tiles
-                if(Checker.isPlayers(sState)){
-                    // if a blank space is clicked, try to move the selected checker to it
-                    if(this.state == CHECKER.BLANK){
-                        Checker checkerToMove;
-                        checkerToMove = parent.getCheckerForCoords(parent.getCoordsForTile(selectedTile));
-                        
-                        int oldCoords[] = new int[]{checkerToMove.getX(), checkerToMove.getY()};
-                        int newCoords[] = parent.getCoordsForTile(this);
-                        
-                        boolean canMove = false;
-                        int[] capturing = new int[]{-1, -1};
-                        
-                        // see if we can move
-                        if(newCoords[0] == oldCoords[0] - 1){
-                            if(newCoords[1] == oldCoords[1] - 1 || newCoords[1] == oldCoords[1] + 1){
-                                canMove = true;
-                            }
-                        }
-                        if(checkerToMove.getType() == CHECKER.REDKING || checkerToMove.getType() == CHECKER.BLACKKING){
-                            if(newCoords[0] == oldCoords[0] + 1){
-                                if(newCoords[1] == oldCoords[1] - 1 || newCoords[1] == oldCoords[1] + 1){
-                                    canMove = true;
-                                }
-                            }
-                        }
-                        
-                        // see if we can capture
-                        if(newCoords[0] == oldCoords[0] - 2){
-                            if(newCoords[1] == oldCoords[1] - 2){
-                                if(Checker.isOpponent(parent.tiles[oldCoords[0]-1][oldCoords[1]-1].getState())){
-                                    canMove = true;
-                                    capturing[0] = oldCoords[0]-1;
-                                    capturing[1] = oldCoords[1]-1;
-                                    
-                                }
-                            }
-                            else if(newCoords[1] == oldCoords[1] + 2){
-                                if(Checker.isOpponent(parent.tiles[oldCoords[0]-1][oldCoords[1]+1].getState())){
-                                    canMove = true;
-                                    capturing[0] = oldCoords[0]-1;
-                                    capturing[1] = oldCoords[1]+1;
-                                }
-                            }
-                        }
-                        if(checkerToMove.getType() == CHECKER.REDKING || checkerToMove.getType() == CHECKER.BLACKKING){
-                            if(newCoords[0] == oldCoords[0] + 2){
-                                if(newCoords[1] == oldCoords[1] - 2){
-                                    if(Checker.isOpponent(parent.tiles[oldCoords[0]+1][oldCoords[1]-1].getState())){
-                                        canMove = true;
-                                        capturing[0] = oldCoords[0]+1;
-                                        capturing[1] = oldCoords[1]-1;
-                                    }
-                                }
-                                else if(newCoords[1] == oldCoords[1] + 2){
-                                    if(Checker.isOpponent(parent.tiles[oldCoords[0]+1][oldCoords[1]+1].getState())){
-                                        canMove = true;
-                                        capturing[0] = oldCoords[0]+1;
-                                        capturing[1] = oldCoords[1]+1;
-                                    }
-                                }
-                            }
-                        }
-                        
-                        if(canMove){
-                            checkerToMove.setX(newCoords[0]);
-                            checkerToMove.setY(newCoords[1]);
-                            if(newCoords[0] == 0 && !(checkerToMove.getType() == CHECKER.REDKING || checkerToMove.getType() == CHECKER.BLACKKING)){
-                                checkerToMove.king();
-                                king();
-                            }
-                            if(capturing[0] != -1){
-                                parent.removeChecker(parent.getCheckerForCoords(capturing));
-                            }
-                            parent.updateBoard();
+            Tile selectedTile = parent.getSelectedTile();
+            ArrayList<Move> possibleMoves = Checker.generateMovesArray(parent.getCheckerForCoords(parent.getCoordsForTile(selectedTile)), parent);
+            if(selectedTile != null){
+                if(this.state == CHECKER.BLANK){
+                    Move thisMove = new Move(parent.getCoordsForTile(selectedTile),parent.getCoordsForTile(this),false);
+                    Boolean moving = false;
+                    for(Move move : possibleMoves){
+                        if(move.isEqual(thisMove)){
+                            thisMove = move;
+                            moving = true;
+                            break;
                         }
                     }
-                }
-            }
-            if(selectedTile != this){
-                parent.deselectAll();
-            }
-            if(thisChecker != null){
-                if(Settings.CHECKERS_PLAYASBLACK){
-                    if(thisChecker.getType() == CHECKER.BLACK || thisChecker.getType() == CHECKER.BLACKKING){
-                        selected = true;
+                    if(moving){
+                        parent.makeMove(thisMove);
                     }
                 }
                 else{
-                    if(thisChecker.getType() == CHECKER.RED || thisChecker.getType() == CHECKER.REDKING){
+                    if(selectedTile != this){
+                        parent.deselectAll();
                         selected = true;
                     }
                 }
+                parent.updateBoard();
             }
-            updateIcon();
-            if(thisChecker != null){
-                parent.showPossibleMoves(this);
-                parent.showPossibleCaptures(this);
-            }**/
-    
+            else{            
+                if(thisChecker != null){
+                    if(Settings.CHECKERS_PLAYASBLACK){
+                        if(thisChecker.getType() == CHECKER.BLACK || thisChecker.getType() == CHECKER.BLACKKING){
+                            selected = true;
+                        }
+                    }
+                    else{
+                        if(thisChecker.getType() == CHECKER.RED || thisChecker.getType() == CHECKER.REDKING){
+                            selected = true;
+                        }
+                    }
+                }possibleMoves = Checker.generateMovesArray(parent.getCheckerForCoords(parent.getCoordsForTile(selectedTile)), parent);
+                parent.displayMoves(possibleMoves);
+            }
+            
+            parent.updateBoard();
+            selectedTile = parent.getSelectedTile();
+            if(selectedTile != null){
+                possibleMoves = Checker.generateMovesArray(parent.getCheckerForCoords(parent.getCoordsForTile(selectedTile)), parent);
+                parent.displayMoves(possibleMoves);
+            }
     }
     
     public CHECKER getState(){

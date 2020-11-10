@@ -155,7 +155,9 @@ public class Board {
             else{
                 iconToSet = Icons.possibleMoveImg;
             }
-            tiles[move.dst[0]][move.dst[1]].setIcon(iconToSet);
+            if(move.dst[0] >= 0 && move.dst[0] < boardSize && move.dst[1] >= 0 && move.dst[1] < boardSize){
+                tiles[move.dst[0]][move.dst[1]].setIcon(iconToSet);
+            }
         }
     }
     
@@ -166,6 +168,23 @@ public class Board {
         if(move.capt){
             Checker toRemove = getCheckerForCoords(move.getCaptCoords());
             removeChecker(toRemove);
+        }
+        if(Settings.CHECKERS_PLAYASBLACK){            
+            if(toMove.getType() == CHECKER.RED && move.dst[0] == boardSize-1){
+                toMove.king();
+            }
+            else if(toMove.getType() == CHECKER.BLACK && move.dst[0] == 0){
+                toMove.king();
+            }
+            
+        }
+        else{
+            if(toMove.getType() == CHECKER.RED && move.dst[0] == 0){
+                toMove.king();
+            }
+            else if(toMove.getType() == CHECKER.BLACK && move.dst[0] == boardSize-1){
+                toMove.king();
+            }
         }
     }
 }
