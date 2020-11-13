@@ -203,7 +203,12 @@ public class Board {
                 possibleMoves.addAll(Checker.generateMovesArray(checker, this));
             }
         }
-        int moveIndex = rand.nextInt(possibleMoves.size());
-        makeMove(possibleMoves.get(moveIndex));        
+        if(possibleMoves.size() == 0){
+            return;
+        }
+        else{
+            int moveIndex = rand.nextInt(possibleMoves.size());
+            makeMove(possibleMoves.get(moveIndex));   
+        }
     }
 }
