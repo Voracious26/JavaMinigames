@@ -211,4 +211,13 @@ public class Board {
             makeMove(possibleMoves.get(moveIndex));   
         }
     }
+    
+    public Boolean inBounds(int[] nums){
+        if(nums[0] >= 0 && nums[0] <= boardSize - 1){
+            if(nums[1] >= 0 && nums[1] <= boardSize - 1){
+                return true;
+            }
+        }
+        return false;
+    }
 }
