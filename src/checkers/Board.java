@@ -8,6 +8,7 @@ import javaminigames.Icons;
 import javaminigames.Settings;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import java.util.Random;
 
 public class Board {
     public int boardSize = 8;
@@ -15,9 +16,11 @@ public class Board {
     Tile tiles[][];
     ArrayList<Checker> redCheckers = new ArrayList<Checker>();
     ArrayList<Checker> blackCheckers = new ArrayList<Checker>();
+    private Random rand;
     
     public Board(Checkers parentBoard){
         parent = parentBoard;
+        rand = new Random();
         // initialize 2D tile array
         tiles = new Tile[boardSize][boardSize];
         for(int i = 0; i < boardSize; ++i){
@@ -186,5 +189,21 @@ public class Board {
                 toMove.king();
             }
         }
+    }
+    
+    public void computerMove(){
+        ArrayList<Move> possibleMoves = new ArrayList<Move>();
+        if(Settings.CHECKERS_PLAYASBLACK){
+            for(Checker checker : redCheckers){
+                possibleMoves.addAll(Checker.generateMovesArray(checker, this));
+            }
+        }
+        else{
+            for(Checker checker : blackCheckers){
+                possibleMoves.addAll(Checker.generateMovesArray(checker, this));
+            }
+        }
+        int moveIndex = rand.nextInt(possibleMoves.size());
+        makeMove(possibleMoves.get(moveIndex));        
     }
 }

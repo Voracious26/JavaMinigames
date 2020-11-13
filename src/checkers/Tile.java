@@ -5,6 +5,8 @@ import static checkers.Checker.CHECKER;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javaminigames.Icons;
 import javaminigames.Settings;
 import javax.swing.*;
@@ -36,6 +38,7 @@ public class Tile {
                         if(move.isEqual(thisMove)){
                             thisMove = move;
                             moving = true;
+                            parent.computerMove();
                             break;
                         }
                     }
